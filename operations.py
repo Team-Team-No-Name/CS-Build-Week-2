@@ -59,12 +59,13 @@ class Operations:
             sleep(res["cooldown"])
 
     def change_name(self, name):
-        res = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/change_name/", json={"name": ["D Wandering Beard"]}, headers={'Authorization': api_key}).json()
+        res = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/change_name/", json={"name": [name], "confirm": "aye"}, headers={'Authorization': api_key}).json()
         print("You shall be known as", str(name))
-        return res.json()
+        print(res)
+        return res
 
     def lambda_coin_wallet(self):
-        res = requests.get("https://lambda-treasure-hunt.herokuapp.com/api/bc/get_balance/", json={"name": name, "confirm": "aye"}, headers={'Authorization': api_key}).json()
+        res = requests.get("https://lambda-treasure-hunt.herokuapp.com/api/bc/get_balance/", headers={'Authorization': api_key}).json()
         print(res)
         sleep(res["cooldown"])
 
