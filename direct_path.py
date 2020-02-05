@@ -57,7 +57,7 @@ def bfs(current_room, end_room):
 
 
 def go_to_room(current_room, end_room):
-    fast_paths = bfs(current_room["room_id"], end_room=namer)
+    fast_paths = bfs(current_room["room_id"], end_room=end_room)
     print(fast_paths)
     routes = []
     for ind in range(len(fast_paths)):
@@ -94,10 +94,18 @@ def sell(item="tiny treasure"):
         print(res)
         sleep(res["cooldown"])
 
+def examine(item='Well'):
+    sleep(current_room["cooldown"])
+    res = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/examine/", json={"name": item}, headers={'Authorization': api_key}).json()
+    with open("well_code.txt","w") as wc:
+        wc.write(res['description'])
+    sleep(res["cooldown"])
+
 
 # sell()
 # ops.status_check()
 # ops.change_name("D Wandering Beard")
+# examine('Well')
 # List of important room numbers
 
 shop = '1'
@@ -108,5 +116,6 @@ gold_shrine = '499'
 sandovsky_statue = '492'
 aarons_athenaeum = '486'
 well = '55'
+mine = '255'
 
-go_to_room(current_room, shop)
+go_to_room(current_room, mine)
