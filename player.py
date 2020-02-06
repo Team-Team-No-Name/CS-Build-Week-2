@@ -5,7 +5,7 @@ from utils import Queue
 from time import sleep
 from decouple import config
 
-api_key = config("DAKOTA_KEY")
+api_key = config('STAN_KEY')
 
 
 class Player:

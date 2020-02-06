@@ -4,7 +4,7 @@ import json
 from utils import Queue
 from decouple import config
 
-api_key = config('DAKOTA_KEY')
+api_key = config('STAN_KEY')
 
 
 def initialize_room():
@@ -12,7 +12,10 @@ def initialize_room():
     start_room = {
         "room_id": 0,
         "title": "A brightly lit room",
-        "description": "You are standing in the center of a brightly lit room. You notice a shop to the west and exits to the north, south and east.",
+        "description": """
+        You are standing in the center of a brightly lit room. You notice a shop to the west and exits
+        to the north, south and east.
+        """,
         "coordinates": "(60,60)",
         "players": [],
         "elevation": 0,
@@ -98,7 +101,8 @@ while q2.size() > 0:
 
     player_room = str(room_data[-1]["room_id"])
     direction = q2.dequeue()
-    res = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/move/", json={"direction": direction}, headers={'Authorization': api_key})
+    res = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/move/",
+                        json={"direction": direction}, headers={'Authorization': api_key})
     data = res.json()
     room_data.append(data)
 

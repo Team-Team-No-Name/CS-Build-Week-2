@@ -180,7 +180,7 @@ class CPU:
         for i in range(8):
             # if interrupt triggered
             if masked_ints & (1 << i):
-                self.ie = 0   # disable 
+                self.ie = 0  # disable
                 self.reg[IS] &= ~(1 << i)  # clear bit for interrupt
 
                 # Save on the stack
@@ -214,8 +214,8 @@ class CPU:
 
         while not self.halted:
 
-            self.check_for_timer_int()     # check for timer interrupt
-            self.handle_ints()             # interrupts occurred?
+            self.check_for_timer_int()  # check for timer interrupt
+            self.handle_ints()  # interrupts occurred?
             ir = self.ram[self.pc]
             operand_a = self.ram_read(self.pc + 1)
             operand_b = self.ram_read(self.pc + 2)

@@ -8,7 +8,7 @@ from operations import Operations
 
 player = Player()
 ops = Operations()
-api_key = config("DAKOTA_KEY")
+api_key = config('STAN_KEY')
 
 with open("room_conns.txt", "r") as conns:
     room_conn = json.loads(conns.read())
@@ -16,7 +16,8 @@ with open("room_conns.txt", "r") as conns:
 # {
 #     "room_id": 148,
 #     "title": "A misty room",
-#     "description": "You are standing on grass and surrounded by a dense mist. You can barely make out the exits in any direction.",
+#     "description": "You are standing on grass and surrounded by a dense mist.
+#     You can barely make out the exits in any direction.
 #     "coordinates": "(56,57)",
 #     "elevation": 0,
 #     "terrain": "NORMAL",
@@ -30,7 +31,8 @@ with open("room_conns.txt", "r") as conns:
 #     "errors": [],
 #     "messages": []
 # }
-current_room = requests.get('https://lambda-treasure-hunt.herokuapp.com/api/adv/init/', headers={'Authorization': api_key}).json()
+current_room = requests.get('https://lambda-treasure-hunt.herokuapp.com/api/adv/init/',
+                            headers={'Authorization': api_key}).json()
 
 
 def bfs(current_room, end_room):
@@ -74,7 +76,8 @@ def go_to_room(current_room, end_room):
         for dirs in routes:
             if counter < len(fast_paths):
                 sleep(current_room['cooldown'])
-                next_room = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/move/", json={"direction": str(dirs)}, headers={'Authorization': api_key}).json()
+                next_room = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/move/",
+                                          json={"direction": str(dirs)}, headers={'Authorization': api_key}).json()
                 current_room = next_room
                 print(current_room)
                 counter += 1
@@ -87,24 +90,28 @@ def sell(item="tiny treasure"):
         print("You should go to the shop to sell")
     else:
         sleep(current_room["cooldown"])
-        # res1 = requests.post(" https://lambda-treasure-hunt.herokuapp.com/api/adv/sell/", json={"name": item}, headers={'Authorization': api_key}).json()
+        # res1 = requests.post(" https://lambda-treasure-hunt.herokuapp.com/api/adv/sell/", json={"name": item},
+        # headers={'Authorization': api_key}).json()
         # print(res1)
         # sleep(res1["cooldown"])
-        res = requests.post(" https://lambda-treasure-hunt.herokuapp.com/api/adv/sell/", json={"name": item, "confirm": "yes"}, headers={'Authorization': api_key}).json()
+        res = requests.post(" https://lambda-treasure-hunt.herokuapp.com/api/adv/sell/",
+                            json={"name": item, "confirm": "yes"}, headers={'Authorization': api_key}).json()
         print(res)
         sleep(res["cooldown"])
 
+
 def examine(item='Well'):
     sleep(current_room["cooldown"])
-    res = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/examine/", json={"name": item}, headers={'Authorization': api_key}).json()
-    with open("well_code.txt","w") as wc:
+    res = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/examine/", json={"name": item},
+                        headers={'Authorization': api_key}).json()
+    with open("well_code.txt", "w") as wc:
         wc.write(res['description'])
     sleep(res["cooldown"])
 
 
-# sell()
+# sell('shiny treasure')
 # ops.status_check()
-# ops.change_name("D Wandering Beard")
+# ops.change_name("standroidbeta")
 # examine('Well')
 # List of important room numbers
 
@@ -116,6 +123,8 @@ gold_shrine = '499'
 sandovsky_statue = '492'
 aarons_athenaeum = '486'
 well = '55'
-mine = '172'
+mine = '112'
 
 go_to_room(current_room, mine)
+
+# 'tiny treasure', 'tiny treasure', 'small treasure', 'shiny treasure', 'small treasure', 'shiny treasure'
