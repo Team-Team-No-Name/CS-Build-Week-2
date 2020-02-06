@@ -38,6 +38,7 @@ def proof_of_work(last_proof, difficulty):
         proof += 1
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
+  
     return proof
 
 
@@ -62,7 +63,6 @@ if __name__ == '__main__':
         node = sys.argv[1]
     else:
         node = 'https://lambda-treasure-hunt.herokuapp.com/api/bc/'
-
     coins_mined = 0
     # Run forever until interrupted
     while True:
@@ -70,7 +70,6 @@ if __name__ == '__main__':
         r = requests.get(url=node + "/last_proof", headers={'Authorization': api_key})
         data = r.json()
         new_proof = proof_of_work(data.get('proof'), data.get('difficulty'))
-
         post_data = {"proof": new_proof}
         print(post_data)
         r = requests.post(url=node + "/mine", json=post_data, headers={'Authorization': api_key})

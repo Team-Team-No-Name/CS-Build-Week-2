@@ -17,7 +17,7 @@ with open("room_conns.txt", "r") as conns:
 #     "room_id": 148,
 #     "title": "A misty room",
 #     "description": "You are standing on grass and surrounded by a dense mist.
-#     You can barely make out the exits in any direction.",
+#     You can barely make out the exits in any direction.
 #     "coordinates": "(56,57)",
 #     "elevation": 0,
 #     "terrain": "NORMAL",

@@ -66,6 +66,7 @@ class Operations:
             sleep(res["cooldown"])
 
     def change_name(self, name):
+
         res = requests.post("https://lambda-treasure-hunt.herokuapp.com/api/adv/change_name/",
                             json={"name": [name], "confirm": "aye"}, headers={'Authorization': api_key}).json()
         print("You shall be known as", str(name))
@@ -98,14 +99,6 @@ class Operations:
             print(res)
             sleep(res["cooldown"])
 
-
 ops = Operations()
 
 ops.lambda_coin_wallet()
-
-# C:\Users\SEEK\AppData\Local\Programs\Python\Python38\python.exe C:/Users/SEEK/Documents/GitHub/CS-Build-Week-2/operations.py
-# {'cooldown': 1.0, 'messages': ['You have a balance of 1.0 Lambda Coins'], 'errors': []}
-#
-# Process finished with exit code 0
-
-# Token d8f89865e1683a54809e2ecf3b71918cd0a07958

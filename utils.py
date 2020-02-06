@@ -30,7 +30,7 @@ class Stack():
 
     def remove_item(self, index):
         return self.stack.pop(index)
-
+    
     def size(self):
         return len(self.stack)
 
@@ -39,7 +39,6 @@ class Graph:
     """
     Represent a graph as a dictionary of vertices mapping labels to edges.
     """
-
     def __init__(self):
         self.vertices = {}
 
@@ -47,13 +46,13 @@ class Graph:
         """
         Add a vertex to the graph.
         """
+
         if vertex_id not in self.vertices:
             self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
-
         If both exist add a connection from v1 to v2
         """
         if v1 in self.vertices and v2 in self.vertices:
@@ -123,3 +122,4 @@ class Graph:
                     new_path = list(path)  # Make a copy of path rather than reference
                     new_path.append(next_vert)
                     queue.enqueue(new_path)
+
