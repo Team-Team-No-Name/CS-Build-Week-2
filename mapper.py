@@ -4,7 +4,7 @@ import json
 from utils import Queue
 from decouple import config
 
-api_key = config('DAKOTA_KEY')
+api_key = config('ADAM_KEY')
 
 
 def initialize_room():
@@ -54,6 +54,7 @@ def explore(queue):
                 for direction in current_conns:
                     if current_conns[direction] == path:
                         queue.enqueue(direction)
+
 
 
 def bft(room_data, room_conns):
