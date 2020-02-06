@@ -116,6 +116,6 @@ gold_shrine = '499'
 sandovsky_statue = '492'
 aarons_athenaeum = '486'
 well = '55'
-mine = '255'
+mine = '172'
 
 go_to_room(current_room, mine)

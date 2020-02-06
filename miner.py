@@ -30,7 +30,7 @@ def proof_of_work(last_proof):
     difficulty = last_proof['difficulty']
     print("Searching for next proof")
     proof = random.randint(-9876543211, 9876543211)
-    last_hash = json.dumps(last)
+    last_hash = hashlib.sha256(str(last).encode()).hexdigest()
     while valid_proof(last_hash, proof) is False:
         proof += 1
 
@@ -46,8 +46,8 @@ def proof_of_work(last_proof):
 
 def valid_proof(last_hash, proof):
     difficulty = last_proof['difficulty']
-    guess = f'{last_hash}{proof}'.encode()
-    guess_hash = hashlib.sha256(guess).hexdigest()
+    guess = hashlib.sha256(str(proof).encode()).hexdigest()
+    # guess_hash = hashlib.sha256(guess).hexdigest()
     return guess[:difficulty] == "0" * difficulty
 
 
